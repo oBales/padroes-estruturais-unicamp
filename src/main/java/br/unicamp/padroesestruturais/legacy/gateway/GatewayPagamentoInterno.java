@@ -6,7 +6,7 @@ import br.unicamp.padroesestruturais.legacy.domain.ResultadoCobranca;
 /**
  * Gateway de pagamento interno, utilizado para cobrancas via Boleto e Pix.
  */
-public class GatewayPagamentoInterno {
+public class GatewayPagamentoInterno implements GatewayCobranca{
 
     public ResultadoCobranca cobrar(String pedidoId, String cliente, double valor, FormaPagamento forma) {
         String referencia = "INT-" + pedidoId + "-" + forma.name();
