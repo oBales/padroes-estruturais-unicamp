@@ -20,9 +20,6 @@ public class CobrancaService {
     private static final double TAXA_OPERACAO_INTERNACIONAL = 0.05;
     private static final double VALOR_SEGURO = 4.90;
 
-    // ---------- SELEÇÃO DE GATEWAY (Adapter) ----------
-    // Esse método concentra num único lugar a decisão de qual gateway usar.
-    // Antes, esse if/else aparecia duas vezes (em cobrar e em cobrarEmLote).
     private GatewayCobranca obterGateway(FormaPagamento forma) {
         if (forma == null) {
             throw new IllegalArgumentException("Forma de pagamento nao suportada: " + forma);
@@ -41,7 +38,6 @@ public class CobrancaService {
         }
     }
 
-    // ---------- MÉTODOS ANTIGOS (mantidos, agora sem duplicação) ----------
 
     public ResultadoCobranca cobrar(Pedido pedido, FormaPagamento forma,
                                      boolean aplicarDescontoFidelidade,
@@ -74,7 +70,6 @@ public class CobrancaService {
         return resultados;
     }
 
-    // mantido só para os testes antigos e para reaproveitar as regras de cálculo
     public double calcularValorFinal(double valorBase,
                                       boolean aplicarDescontoFidelidade,
                                       boolean aplicarJurosParcelamento,
@@ -98,8 +93,6 @@ public class CobrancaService {
 
         return valor;
     }
-
-    // ---------- MÉTODOS NOVOS (Decorator, sem parâmetros booleanos) ----------
 
     @SafeVarargs
     public final ResultadoCobranca cobrar(Pedido pedido, FormaPagamento forma,
